@@ -4,12 +4,11 @@ on:
   push:
     branches:
       - master
-      - main
 
   pull_request:
     branches:
       - master
-      - main
+
 
 jobs:
 
@@ -18,20 +17,21 @@ jobs:
   # ==========================================
   test:
 
-    name: Test ResQDeploy
+    name: Test
 
     runs-on: ubuntu-latest
 
     steps:
 
       # ----------------------------------------
-      # Step 1: Checkout repository
+      # 1. Checkout source code
       # ----------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
+
       # ----------------------------------------
-      # Step 2: Setup Node.js
+      # 2. Setup Node.js
       # ----------------------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -40,29 +40,33 @@ jobs:
           cache: npm
           cache-dependency-path: backend/package-lock.json
 
+
       # ----------------------------------------
-      # Step 3: Install backend dependencies
+      # 3. Install backend dependencies
       # ----------------------------------------
       - name: Install backend dependencies
         working-directory: backend
         run: npm ci
 
+
       # ----------------------------------------
-      # Step 4: Check backend syntax
+      # 4. Validate backend
       # ----------------------------------------
       - name: Validate backend
         working-directory: backend
         run: node --check server.js
 
+
       # ----------------------------------------
-      # Step 5: Run backend tests
+      # 5. Run backend tests
       # ----------------------------------------
       - name: Run backend tests
         working-directory: backend
         run: npm test --if-present
 
+
       # ----------------------------------------
-      # Step 6: Validate frontend files
+      # 6. Validate frontend
       # ----------------------------------------
       - name: Validate frontend
         run: |
@@ -70,21 +74,22 @@ jobs:
           test -f frontend/style.css
           test -f frontend/script.js
 
+
       # ----------------------------------------
-      # Step 7: Create build artifact
+      # 7. Prepare deployment package
       # ----------------------------------------
-      - name: Prepare application artifact
+      - name: Prepare deployment package
         run: |
           mkdir -p deployment
           cp -r backend deployment/
           cp -r frontend deployment/
           cp -r database deployment/
-          cp -r docs deployment/
+
 
       # ----------------------------------------
-      # Step 8: Upload artifact
+      # 8. Upload deployment artifact
       # ----------------------------------------
-      - name: Upload application artifact
+      - name: Upload deployment artifact
         uses: actions/upload-artifact@v4
         with:
           name: resqdeploy-build
@@ -96,49 +101,49 @@ jobs:
   # ==========================================
   deploy:
 
-    name: Deploy ResQDeploy
+    name: Deploy
 
     needs: test
 
     runs-on: ubuntu-latest
 
-    # Only deploy when pushing to master/main
     if: github.event_name == 'push'
 
     steps:
 
       # ----------------------------------------
-      # Step 1: Checkout repository
+      # 1. Download build artifact
       # ----------------------------------------
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # ----------------------------------------
-      # Step 2: Download build artifact
-      # ----------------------------------------
-      - name: Download application artifact
+      - name: Download deployment artifact
         uses: actions/download-artifact@v4
         with:
           name: resqdeploy-build
           path: deployment
 
+
       # ----------------------------------------
-      # Step 3: Verify deployment package
+      # 2. Verify deployment package
       # ----------------------------------------
       - name: Verify deployment package
         run: |
-          echo "ResQDeploy deployment package created successfully."
+          echo "Checking ResQDeploy deployment package..."
+          echo ""
           echo "Backend:"
           ls -la deployment/backend
+          echo ""
           echo "Frontend:"
           ls -la deployment/frontend
+          echo ""
+          echo "Database:"
+          ls -la deployment/database
+
 
       # ----------------------------------------
-      # Temporary deployment step
+      # 3. Deployment placeholder
       # ----------------------------------------
       - name: Deployment Ready
         run: |
-          echo "======================================"
-          echo "ResQDeploy deployment pipeline passed"
-          echo "======================================"
-          echo "AWS deployment will be connected here."
+          echo "=========================================="
+          echo "ResQDeploy deployment pipeline successful"
+          echo "=========================================="
+          echo "AWS deployment will be connected later."
