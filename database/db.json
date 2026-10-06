@@ -1,0 +1,110 @@
+{
+    "incidents": [
+        {
+            "id": 1,
+            "name": "Chennai Flood",
+            "type": "Flood",
+            "location": "Chennai",
+            "severity": "Critical",
+            "peopleAffected": 250,
+            "status": "Active",
+            "description": "Heavy flooding reported in Chennai.",
+            "createdAt": "2026-10-06T10:00:00.000Z",
+            "updatedAt": "2026-10-06T18:24:11.140Z",
+            "assignedResources": [
+                1
+            ],
+            "assignedTeams": [
+                1
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Nilgiris Landslide",
+            "type": "Landslide",
+            "location": "Nilgiris",
+            "severity": "High",
+            "peopleAffected": 97,
+            "status": "Active",
+            "description": "Landslide reported in the Nilgiris region.",
+            "createdAt": "2026-10-06T10:30:00.000Z",
+            "updatedAt": "2026-10-06T10:30:00.000Z",
+            "assignedResources": [],
+            "assignedTeams": []
+        }
+    ],
+    "resources": [
+        {
+            "id": 1,
+            "name": "Ambulance 01",
+            "type": "Ambulance",
+            "quantity": 1,
+            "location": "Chennai",
+            "status": "Deployed",
+            "assignedIncidentId": 1,
+            "createdAt": "2026-10-06T11:00:00.000Z"
+        },
+        {
+            "id": 2,
+            "name": "Rescue Vehicle 01",
+            "type": "Rescue Vehicle",
+            "quantity": 1,
+            "location": "Chennai",
+            "status": "Available",
+            "assignedIncidentId": null,
+            "createdAt": "2026-10-06T11:05:00.000Z"
+        },
+        {
+            "id": 3,
+            "name": "Medical Supply Kit",
+            "type": "Medical Supplies",
+            "quantity": 20,
+            "location": "Chennai",
+            "status": "Available",
+            "assignedIncidentId": null,
+            "createdAt": "2026-10-06T11:10:00.000Z"
+        },
+        {
+            "id": 4,
+            "name": "Water Supply Unit",
+            "type": "Water Supply",
+            "quantity": 50,
+            "location": "Chennai",
+            "status": "Available",
+            "assignedIncidentId": null,
+            "createdAt": "2026-10-06T11:15:00.000Z"
+        }
+    ],
+    "teams": [
+        {
+            "id": 1,
+            "name": "Chennai Rescue Team",
+            "type": "Rescue",
+            "members": 12,
+            "location": "Chennai",
+            "status": "Deployed",
+            "assignedIncidentId": 1,
+            "createdAt": "2026-10-06T11:20:00.000Z"
+        },
+        {
+            "id": 2,
+            "name": "Emergency Medical Team",
+            "type": "Medical",
+            "members": 8,
+            "location": "Chennai",
+            "status": "Available",
+            "assignedIncidentId": null,
+            "createdAt": "2026-10-06T11:25:00.000Z"
+        },
+        {
+            "id": 3,
+            "name": "Fire & Safety Team",
+            "type": "Fire & Safety",
+            "members": 10,
+            "location": "Chennai",
+            "status": "Available",
+            "assignedIncidentId": null,
+            "createdAt": "2026-10-06T11:30:00.000Z"
+        }
+    ]
+}

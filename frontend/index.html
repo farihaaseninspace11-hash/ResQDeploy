@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="ResQDeploy Disaster Resilient Emergency Response Platform"
+    >
+
+    <title>
+        ResQDeploy Command Center
+    </title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+<!-- =========================================================
+     SIDEBAR
+     ========================================================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-mark">
+            🚨
+        </div>
+
+        <div class="brand-text">
+
+            <strong>
+                ResQDeploy
+            </strong>
+
+            <span>
+                Emergency Command
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="sidebar-section-title">
+        COMMAND CENTER
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <button
+            class="nav-btn active"
+            data-page="dashboard"
+            onclick="showPage('dashboard')"
+        >
+
+            <span class="nav-icon">
+                ▦
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
+        </button>
+
+
+        <button
+            class="nav-btn"
+            data-page="emergencies"
+            onclick="showPage('emergencies')"
+        >
+
+            <span class="nav-icon">
+                🚨
+            </span>
+
+            <span>
+                Emergencies
+            </span>
+
+        </button>
+
+
+        <button
+            class="nav-btn"
+            data-page="resources"
+            onclick="showPage('resources')"
+        >
+
+            <span class="nav-icon">
+                🚑
+            </span>
+
+            <span>
+                Resources
+            </span>
+
+        </button>
+
+
+        <button
+            class="nav-btn"
+            data-page="teams"
+            onclick="showPage('teams')"
+        >
+
+            <span class="nav-icon">
+                👥
+            </span>
+
+            <span>
+                Response Teams
+            </span>
+
+        </button>
+
+
+        <button
+            class="nav-btn"
+            data-page="reports"
+            onclick="showPage('reports')"
+        >
+
+            <span class="nav-icon">
+                ◩
+            </span>
+
+            <span>
+                Reports
+            </span>
+
+        </button>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="system-card">
+
+            <div class="system-card-top">
+
+                <span class="online-dot"></span>
+
+                <strong>
+                    SYSTEM ONLINE
+                </strong>
+
+            </div>
+
+            <p>
+                All services operational
+            </p>
+
+        </div>
+
+        <div class="sidebar-version">
+            ResQDeploy v1.0
+        </div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
+
+<main class="main">
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <div
+                class="breadcrumb"
+                id="pageTitle"
+            >
+                Emergency Command Center
+            </div>
+
+            <div class="topbar-subtitle">
+                Disaster response operations
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="date-box">
+
+                <span class="date-icon">
+                    ◷
+                </span>
+
+                <span id="currentDate">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <div class="live-status">
+
+                <span class="live-pulse"></span>
+
+                LIVE
+
+            </div>
+
+
+            <button
+                class="refresh-button"
+                onclick="refreshDashboard()"
+                title="Refresh dashboard"
+            >
+                ↻
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTENT
+         ===================================================== -->
+
+    <div class="content">
+
+
+        <!-- =================================================
+             DASHBOARD
+             ================================================= -->
+
+        <section
+            class="page active"
+            id="dashboardPage"
+        >
+
+
+            <!-- HERO -->
+
+            <div class="hero">
+
+                <div class="hero-content">
+
+                    <div class="hero-label">
+                        EMERGENCY OPERATIONS CENTER
+                    </div>
+
+                    <h1>
+                        Disaster Response Overview
+                    </h1>
+
+                    <p>
+                        Monitor emergencies, coordinate resources,
+                        and manage response teams in real time.
+                    </p>
+
+                </div>
+
+
+                <div class="hero-status">
+
+                    <div class="hero-status-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Operational
+                        </strong>
+
+                        <span>
+                            Response network active
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- KPI CARDS -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card danger-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon danger-icon">
+                            🚨
+                        </div>
+
+                        <span class="stat-trend danger-text">
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="activeIncidents"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Active Incidents
+                    </div>
+
+                    <div class="stat-description">
+                        Emergencies requiring attention
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card purple-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon purple-icon">
+                            👥
+                        </div>
+
+                        <span class="stat-trend">
+                            PEOPLE
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="peopleAffectedCount"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        People Affected
+                    </div>
+
+                    <div class="stat-description">
+                        Across all active incidents
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card blue-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon blue-icon">
+                            🚑
+                        </div>
+
+                        <span class="stat-trend">
+                            READY
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="resourceCount"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Available Resources
+                    </div>
+
+                    <div class="stat-description">
+                        Assets ready for deployment
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card green-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon green-icon">
+                            👨‍🚒
+                        </div>
+
+                        <span class="stat-trend">
+                            READY
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="teamCount"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Response Teams
+                    </div>
+
+                    <div class="stat-description">
+                        Teams currently available
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- OVERVIEW GRID -->
+
+            <div class="overview-grid">
+
+
+                <!-- THREAT LEVEL -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="panel-eyebrow">
+                                THREAT MONITOR
+                            </span>
+
+                            <h2>
+                                Current Threat Level
+                            </h2>
+
+                        </div>
+
+                        <span class="panel-icon">
+                            ◉
+                        </span>
+
+                    </div>
+
+
+                    <div class="severity-list">
+
+
+                        <div class="severity-row">
+
+                            <div class="severity-label">
+
+                                <span class="severity-dot critical-dot"></span>
+
+                                Critical
+
+                            </div>
+
+                            <div class="severity-track">
+
+                                <div
+                                    class="severity-progress critical-progress"
+                                    id="criticalProgress"
+                                ></div>
+
+                            </div>
+
+                            <strong id="criticalCount">
+                                0
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="severity-row">
+
+                            <div class="severity-label">
+
+                                <span class="severity-dot high-dot"></span>
+
+                                High
+
+                            </div>
+
+                            <div class="severity-track">
+
+                                <div
+                                    class="severity-progress high-progress"
+                                    id="highProgress"
+                                ></div>
+
+                            </div>
+
+                            <strong id="highCount">
+                                0
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="severity-row">
+
+                            <div class="severity-label">
+
+                                <span class="severity-dot medium-dot"></span>
+
+                                Medium
+
+                            </div>
+
+                            <div class="severity-track">
+
+                                <div
+                                    class="severity-progress medium-progress"
+                                    id="mediumProgress"
+                                ></div>
+
+                            </div>
+
+                            <strong id="mediumCount">
+                                0
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="severity-row">
+
+                            <div class="severity-label">
+
+                                <span class="severity-dot low-dot"></span>
+
+                                Low
+
+                            </div>
+
+                            <div class="severity-track">
+
+                                <div
+                                    class="severity-progress low-progress"
+                                    id="lowProgress"
+                                ></div>
+
+                            </div>
+
+                            <strong id="lowCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- READINESS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="panel-eyebrow">
+                                OPERATIONAL READINESS
+                            </span>
+
+                            <h2>
+                                Resource Availability
+                            </h2>
+
+                        </div>
+
+                        <span class="panel-icon">
+                            ◈
+                        </span>
+
+                    </div>
+
+
+                    <div class="readiness-list">
+
+
+                        <div class="readiness-item">
+
+                            <div class="readiness-info">
+
+                                <span>
+                                    Available Resources
+                                </span>
+
+                                <strong
+                                    id="availableResources"
+                                >
+                                    0
+                                </strong>
+
+                            </div>
+
+                            <div class="readiness-track">
+
+                                <div
+                                    class="readiness-fill"
+                                    id="resourceProgress"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="readiness-item">
+
+                            <div class="readiness-info">
+
+                                <span>
+                                    Deployed Resources
+                                </span>
+
+                                <strong
+                                    id="deployedResources"
+                                >
+                                    0
+                                </strong>
+
+                            </div>
+
+                            <div class="readiness-track">
+
+                                <div
+                                    class="readiness-fill deployed-fill"
+                                    id="deployedResourceProgress"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="readiness-item">
+
+                            <div class="readiness-info">
+
+                                <span>
+                                    Available Teams
+                                </span>
+
+                                <strong
+                                    id="availableTeams"
+                                >
+                                    0
+                                </strong>
+
+                            </div>
+
+                            <div class="readiness-track">
+
+                                <div
+                                    class="readiness-fill team-fill"
+                                    id="teamProgress"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="readiness-item">
+
+                            <div class="readiness-info">
+
+                                <span>
+                                    Deployed Teams
+                                </span>
+
+                                <strong
+                                    id="deployedTeams"
+                                >
+                                    0
+                                </strong>
+
+                            </div>
+
+                            <div class="readiness-track">
+
+                                <div
+                                    class="readiness-fill deployed-team-fill"
+                                    id="deployedTeamProgress"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RECENT INCIDENTS -->
+
+            <div class="panel incidents-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-eyebrow">
+                            LIVE OPERATIONS
+                        </span>
+
+                        <h2>
+                            Recent Emergencies
+                        </h2>
+
+                    </div>
+
+                    <button
+                        class="view-all-button"
+                        onclick="showPage('emergencies')"
+                    >
+                        View All →
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Emergency
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Location
+                                </th>
+
+                                <th>
+                                    Severity
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="incidentTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             EMERGENCIES
+             ================================================= -->
+
+        <section
+            class="page"
+            id="emergenciesPage"
+        >
+
+            <div class="page-heading">
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        INCIDENT MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Emergency Management
+                    </h1>
+
+                    <p>
+                        Track and manage all reported emergencies.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    onclick="openIncidentModal()"
+                >
+                    + Report Emergency
+                </button>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Emergency
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Location
+                                </th>
+
+                                <th>
+                                    Severity
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    People
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="emergencyTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RESOURCES
+             ================================================= -->
+
+        <section
+            class="page"
+            id="resourcesPage"
+        >
+
+            <div class="page-heading">
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        ASSET MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Emergency Resources
+                    </h1>
+
+                    <p>
+                        Monitor, deploy and manage response assets.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    onclick="openResourceModal()"
+                >
+                    + Add Resource
+                </button>
+
+            </div>
+
+
+            <div class="resource-summary">
+
+
+                <div class="summary-card">
+
+                    <span>
+                        TOTAL
+                    </span>
+
+                    <strong id="resourceTotal">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card success-summary">
+
+                    <span>
+                        AVAILABLE
+                    </span>
+
+                    <strong id="resourceAvailable">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card blue-summary">
+
+                    <span>
+                        DEPLOYED
+                    </span>
+
+                    <strong id="resourceDeployed">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card warning-summary">
+
+                    <span>
+                        OTHER
+                    </span>
+
+                    <strong id="resourceOther">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Resource
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Quantity
+                                </th>
+
+                                <th>
+                                    Location
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="resourceTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TEAMS
+             ================================================= -->
+
+        <section
+            class="page"
+            id="teamsPage"
+        >
+
+            <div class="page-heading">
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        FIELD OPERATIONS
+                    </span>
+
+                    <h1>
+                        Response Teams
+                    </h1>
+
+                    <p>
+                        Coordinate emergency response personnel.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    onclick="openTeamModal()"
+                >
+                    + Add Response Team
+                </button>
+
+            </div>
+
+
+            <div class="team-summary">
+
+
+                <div class="summary-card">
+
+                    <span>
+                        TOTAL TEAMS
+                    </span>
+
+                    <strong id="teamTotal">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card success-summary">
+
+                    <span>
+                        AVAILABLE
+                    </span>
+
+                    <strong id="teamAvailable">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card blue-summary">
+
+                    <span>
+                        DEPLOYED
+                    </span>
+
+                    <strong id="teamDeployed">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card purple-summary">
+
+                    <span>
+                        PERSONNEL
+                    </span>
+
+                    <strong id="teamMembers">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="team-grid"
+                id="teamGrid"
+            >
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             REPORTS
+             ================================================= -->
+
+        <section
+            class="page"
+            id="reportsPage"
+        >
+
+            <div class="page-heading">
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        ANALYTICS
+                    </span>
+
+                    <h1>
+                        Emergency Reports
+                    </h1>
+
+                    <p>
+                        Operational overview and response statistics.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="report-grid">
+
+
+                <div class="summary-card">
+
+                    <span>
+                        TOTAL INCIDENTS
+                    </span>
+
+                    <strong id="reportIncidentCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card purple-summary">
+
+                    <span>
+                        PEOPLE AFFECTED
+                    </span>
+
+                    <strong id="reportPeopleCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card blue-summary">
+
+                    <span>
+                        RESOURCES
+                    </span>
+
+                    <strong id="reportResourceCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card success-summary">
+
+                    <span>
+                        RESPONSE TEAMS
+                    </span>
+
+                    <strong id="reportTeamCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================================
+     INCIDENT MODAL
+     ========================================================= -->
+
+<div
+    class="modal"
+    id="incidentModal"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="panel-eyebrow">
+                    NEW INCIDENT
+                </span>
+
+                <h2>
+                    Report Emergency
+                </h2>
+
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeIncidentModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            id="incidentForm"
+            class="modal-form"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Emergency Name
+                </label>
+
+                <input
+                    id="incidentName"
+                    type="text"
+                    placeholder="Example: Chennai Flood"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Incident Type
+                    </label>
+
+                    <select
+                        id="incidentType"
+                        required
+                    >
+
+                        <option value="">
+                            Select type
+                        </option>
+
+                        <option value="Flood">
+                            Flood
+                        </option>
+
+                        <option value="Landslide">
+                            Landslide
+                        </option>
+
+                        <option value="Earthquake">
+                            Earthquake
+                        </option>
+
+                        <option value="Cyclone">
+                            Cyclone
+                        </option>
+
+                        <option value="Fire">
+                            Fire
+                        </option>
+
+                        <option value="Medical Emergency">
+                            Medical Emergency
+                        </option>
+
+                        <option value="Building Collapse">
+                            Building Collapse
+                        </option>
+
+                        <option value="Accident">
+                            Accident
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Severity
+                    </label>
+
+                    <select
+                        id="incidentSeverity"
+                        required
+                    >
+
+                        <option value="">
+                            Select severity
+                        </option>
+
+                        <option value="Critical">
+                            Critical
+                        </option>
+
+                        <option value="High">
+                            High
+                        </option>
+
+                        <option value="Medium">
+                            Medium
+                        </option>
+
+                        <option value="Low">
+                            Low
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Location
+                    </label>
+
+                    <input
+                        id="incidentLocation"
+                        type="text"
+                        placeholder="Example: Chennai"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        People Affected
+                    </label>
+
+                    <input
+                        id="peopleAffected"
+                        type="number"
+                        min="0"
+                        placeholder="0"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    id="incidentDescription"
+                    placeholder="Describe the emergency..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="closeIncidentModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Create Emergency
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     RESOURCE MODAL
+     ========================================================= -->
+
+<div
+    class="modal"
+    id="resourceModal"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="panel-eyebrow">
+                    ASSET REGISTRATION
+                </span>
+
+                <h2>
+                    Add Resource
+                </h2>
+
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeResourceModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            id="resourceForm"
+            class="modal-form"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Resource Name
+                </label>
+
+                <input
+                    id="resourceName"
+                    type="text"
+                    placeholder="Example: Ambulance 02"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Resource Type
+                </label>
+
+                <input
+                    id="resourceType"
+                    type="text"
+                    placeholder="Example: Ambulance"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Quantity
+                    </label>
+
+                    <input
+                        id="resourceQuantity"
+                        type="number"
+                        min="1"
+                        value="1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Location
+                    </label>
+
+                    <input
+                        id="resourceLocation"
+                        type="text"
+                        placeholder="Chennai"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="closeResourceModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Add Resource
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TEAM MODAL
+     ========================================================= -->
+
+<div
+    class="modal"
+    id="teamModal"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="panel-eyebrow">
+                    FIELD UNIT
+                </span>
+
+                <h2>
+                    Add Response Team
+                </h2>
+
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeTeamModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            id="teamForm"
+            class="modal-form"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Team Name
+                </label>
+
+                <input
+                    id="teamName"
+                    type="text"
+                    placeholder="Example: Chennai Rescue Team"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Team Type
+                    </label>
+
+                    <input
+                        id="teamType"
+                        type="text"
+                        placeholder="Rescue"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Members
+                    </label>
+
+                    <input
+                        id="teamMemberCount"
+                        type="number"
+                        min="1"
+                        value="5"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Base Location
+                </label>
+
+                <input
+                    id="teamLocation"
+                    type="text"
+                    placeholder="Chennai"
+                    required
+                >
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="closeTeamModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Create Team
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
