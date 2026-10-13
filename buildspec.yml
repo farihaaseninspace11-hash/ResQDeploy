@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - cd backend && npm ci
+
+  build:
+    commands:
+      - cd "$CODEBUILD_SRC_DIR/backend"
+      - node --check server-mysql.js
+      - node --check mysqlDatabase.js
+      - for file in routes/*-mysql.js; do node --check "$file" || exit 1; done
+      - echo "ResQDeploy build and syntax checks passed."
+
+artifacts:
+  files:
+    - appspec.yml
+    - scripts/*.sh
+    - backend/package.json
+    - backend/package-lock.json
+    - backend/server-mysql.js
+    - backend/mysqlDatabase.js
+    - backend/routes/incidents-mysql.js
+    - backend/routes/resources-mysql.js
+    - backend/routes/teams-mysql.js
+    - backend/routes/dashboard-mysql.js
+    - frontend/index.html
+    - frontend/script.js
+    - frontend/style.css
